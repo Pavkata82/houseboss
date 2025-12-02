@@ -1,4 +1,5 @@
 from flask import Blueprint, request
+from datetime import datetime
 from app.database import db
 from app.models.user import User
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -19,7 +20,7 @@ def register():
         last_name=data["last_name"],
         password_hash=generate_password_hash(data["password"]),
         role="student",
-        created_at="now"
+        created_at=datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     )
 
     db.session.add(user)

@@ -99,6 +99,16 @@ export default function Navbar() {
         >
           Cleaning
         </NavLink>
+        {role === "admin" && (
+          <NavLink
+            to="/users"
+            className={({ isActive }) =>
+              isActive ? activeClass : inactiveClass
+            }
+          >
+            Users
+          </NavLink>
+        )}
       </div>
     </nav>
   );

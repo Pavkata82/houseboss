@@ -20,7 +20,7 @@ def create_app():
     from app.routes.events import events_bp
     from app.routes.rules import rules_bp
     from app.routes.contacts import contacts_bp
-    from app.routes.students import students_bp
+    from app.routes.users import users_bp
     from app.routes.cleaning import cleaning_bp
 
     # Register blueprints
@@ -29,7 +29,7 @@ def create_app():
     app.register_blueprint(events_bp, url_prefix="/events")
     app.register_blueprint(rules_bp, url_prefix="/rules")
     app.register_blueprint(contacts_bp, url_prefix="/contacts")
-    app.register_blueprint(students_bp, url_prefix="/students")
+    app.register_blueprint(users_bp, url_prefix="/users")
     app.register_blueprint(cleaning_bp, url_prefix="/cleaning")
 
     return app

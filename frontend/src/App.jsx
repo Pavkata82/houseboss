@@ -5,12 +5,14 @@ import EventsPage from "./pages/Events";
 import CleaningPage from "./pages/Cleaning";
 import ComplaintsPage from "./pages/Complaints";
 import AuthenticationPage from "./pages/Authentication";
+import UsersPage from "./pages/Users";
 import { loader as protectRouteLoader } from "./loaders/protectRouteLoader";
 import { loader as authLoader } from "./loaders/authLoader";
 import { loader as homeLoader } from "./loaders/homeLoader";
 import { loader as eventsLoader } from "./loaders/eventsLoader";
 import { loader as complaintsLoader } from "./loaders/complaintsLoader";
 import { loader as cleaningLoader } from "./loaders/cleaningLoader";
+import { loader as usersLoader } from "./loaders/usersLoader";
 import { action as authAction } from "./actions/authAction";
 import { action as eventsAction } from "./actions/eventsAction";
 import { action as complaintAction } from "./actions/complaintAction";
@@ -43,6 +45,11 @@ function App() {
           element: <ComplaintsPage />,
           loader: complaintsLoader,
           action: complaintAction,
+        },
+        {
+          path: "users",
+          element: <UsersPage />,
+          loader: usersLoader,
         },
       ],
     },

@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../store/AuthContext";
+
 import EventsGrid from "../components/EventsGrid";
 import JoinEventModal from "../components/JoinEventModal";
 import CreateEventModal from "../components/CreateEventModal";
@@ -8,6 +11,7 @@ import DataLoader from "../components/DataLoader";
 export default function EventsPage() {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [createOpen, setCreateOpen] = useState(false);
+  const { user } = useContext(AuthContext);
   const { events } = useLoaderData();
   const revalidator = useRevalidator();
 
@@ -33,13 +37,19 @@ export default function EventsPage() {
         </div>
 
         <DataLoader promise={events} onRetry={() => revalidator.revalidate()}>
-          {(resolvedEvents) =>
-            resolvedEvents.error ? (
-              <p className="text-red-600">{resolvedEvents.error}</p>
-            ) : (
-              <EventsGrid events={resolvedEvents} onJoin={setSelectedEvent} />
-            )
-          }
+          {(resolvedEvents) => {
+            if (resolvedEvents.error) {
+              return <p className="text-red-600">{resolvedEvents.error}</p>;
+            }
+
+            const sorted = [...resolvedEvents].sort((a, b) => {
+              const aJoined = a.joined_user_ids?.includes(user?.id) ? 1 : 0;
+              const bJoined = b.joined_user_ids?.includes(user?.id) ? 1 : 0;
+              return bJoined - aJoined; // joined first
+            });
+
+            return <EventsGrid events={sorted} onJoin={setSelectedEvent} />;
+          }}
         </DataLoader>
 
         {/* Join Event Modal */}

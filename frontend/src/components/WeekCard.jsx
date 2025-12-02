@@ -1,23 +1,37 @@
 export default function WeekCard({ week }) {
-  const statusColors = {
-    Current: "bg-olive text-cream p-1 rounded",
-    Next: "bg-gray-200 text-black p-1 rounded",
+  const statusStyles = {
+    Current: "bg-olive/80  text-cream",
+    Next: "bg-gray-100 text-gray-900",
   };
 
   return (
-    <div className="bg-cream border-2 border-olive rounded-lg shadow-lg hover:border-orange hover:shadow-xl hover:-translate-y-1 transition">
-      <div className="p-6">
+    <div className="relative bg-cream border-2 border-olive rounded-xl shadow-md hover:shadow-xl transition-all duration-200 hover:-translate-y-1">
+      <div
+        className={`absolute top-0 left-0 h-full w-2 rounded-l-xl ${
+          week.status === "Current" ? "bg-olive" : "bg-gray-400"
+        }`}
+      ></div>
+
+      <div className="p-6 pl-8">
         <div className="flex justify-between items-start mb-4">
           <div>
-            <h2 className={`text-2xl font-bold ${statusColors[week.status]}`}>
+            <h2
+              className={`inline-block px-3 py-1 rounded-full font-semibold text-sm mb-2 ${
+                statusStyles[week.status]
+              }`}
+            >
               {week.status}
             </h2>
+
             {week.start && week.end ? (
-              <p className="text-gray-600">
-                {week.week} ({week.start} - {week.end})
+              <p className="text-gray-700 font-medium">
+                {week.week} —{" "}
+                <span className="font-normal">
+                  {week.start} to {week.end}
+                </span>
               </p>
             ) : (
-              <p className="text-gray-600">{week.week}</p>
+              <p className="text-gray-700">{week.week}</p>
             )}
           </div>
         </div>
@@ -27,10 +41,10 @@ export default function WeekCard({ week }) {
             {week.people.map((person, i) => (
               <div
                 key={i}
-                className="flex items-center gap-3 p-3 bg-olive/10 rounded-lg border-l-3 border-olive"
+                className="flex items-center gap-3 p-3 bg-olive/10 rounded-lg border-l-4 border-olive hover:bg-olive/20 transition-colors"
               >
                 <svg
-                  className="w-5 h-5 text-olive"
+                  className="w-5 h-5 text-olive flex-shrink-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

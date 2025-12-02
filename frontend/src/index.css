@@ -7,3 +7,5 @@
   --color-orange: #f3b552;
   --color-brick: #993d2e;
 }
+
+@plugin 'tailwind-scrollbar';
