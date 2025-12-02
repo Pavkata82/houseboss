@@ -10,6 +10,7 @@ import { loader as authLoader } from "./loaders/authLoader";
 import { loader as homeLoader } from "./loaders/homeLoader";
 import { loader as eventsLoader } from "./loaders/eventsLoader";
 import { loader as complaintsLoader } from "./loaders/complaintsLoader";
+import { loader as cleaningLoader } from "./loaders/cleaningLoader";
 import { action as authAction } from "./actions/authAction";
 import { action as eventsAction } from "./actions/eventsAction";
 import { action as complaintAction } from "./actions/complaintAction";
@@ -36,7 +37,7 @@ function App() {
           loader: eventsLoader,
           action: eventsAction,
         },
-        { path: "cleaning", element: <CleaningPage /> },
+        { path: "cleaning", element: <CleaningPage />, loader: cleaningLoader },
         {
           path: "complaints",
           element: <ComplaintsPage />,

@@ -1,47 +1,12 @@
+import { useLoaderData } from "react-router-dom";
 import WeekCard from "../components/WeekCard";
 import EventCleaningCard from "../components/EventCleaningCard";
 
 export default function CleaningPage() {
-  // Example cleaning schedule data
-  const schedule = [
-    {
-      status: "Current",
-      people: [
-        { name: "James Anderson", room: "101" },
-        { name: "Emma Wilson", room: "102" },
-      ],
-    },
-    {
-      week: "Week 2",
-      date: "Jan 22-28",
-      status: "Next",
-      people: [
-        { name: "Michael Brown", room: "103" },
-        { name: "Sophie Taylor", room: "104" },
-      ],
-    },
-  ];
+  const data = useLoaderData();
 
-  const events = [
-    {
-      id: 1,
-      title: "Party",
-      date: "Feb 15",
-      user: "Brian",
-    },
-    {
-      id: 2,
-      title: "Cultural Night",
-      date: "Feb 16",
-      user: "Maggy",
-    },
-    {
-      id: 3,
-      title: "Dinner",
-      date: "Feb 17",
-      user: "George",
-    },
-  ];
+  const schedule = [data.current, data.next];
+  const events = data.events;
 
   return (
     <div className="bg-gradient-to-br from-lightCream to-cream min-h-screen">
@@ -55,12 +20,14 @@ export default function CleaningPage() {
               Every week 2 people are responsible for cleaning common areas
             </p>
           </div>
+
           <div className="space-y-5 mb-10">
             {schedule.map((week, i) => (
               <WeekCard key={i} week={week} />
             ))}
           </div>
         </div>
+
         <div>
           <div className="text-center mb-12">
             <h1 className="text-4xl font-bold text-brick mb-3">

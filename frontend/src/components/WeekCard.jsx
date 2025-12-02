@@ -12,13 +12,19 @@ export default function WeekCard({ week }) {
             <h2 className={`text-2xl font-bold ${statusColors[week.status]}`}>
               {week.status}
             </h2>
-            <p className="text-gray-600">{week.date}</p>
+            {week.start && week.end ? (
+              <p className="text-gray-600">
+                {week.week} ({week.start} - {week.end})
+              </p>
+            ) : (
+              <p className="text-gray-600">{week.week}</p>
+            )}
           </div>
         </div>
 
         {week.people.length > 0 ? (
           <div className="space-y-3">
-            {week.people.map((p, i) => (
+            {week.people.map((person, i) => (
               <div
                 key={i}
                 className="flex items-center gap-3 p-3 bg-olive/10 rounded-lg border-l-3 border-olive"
@@ -37,8 +43,7 @@ export default function WeekCard({ week }) {
                   />
                 </svg>
                 <div>
-                  <p className="font-semibold text-brick">{p.name}</p>
-                  <p className="text-sm text-gray-600">Room: {p.room}</p>
+                  <p className="font-semibold text-brick">{person}</p>
                 </div>
               </div>
             ))}
