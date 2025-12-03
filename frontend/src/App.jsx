@@ -25,6 +25,7 @@ function App() {
       element: <AuthenticationPage />,
       loader: authLoader,
       action: authAction,
+      errorElement: <ErrorPage />,
     },
     {
       path: "/",
@@ -32,24 +33,37 @@ function App() {
       loader: protectRouteLoader,
       errorElement: <ErrorPage />,
       children: [
-        { index: true, element: <HomePage />, loader: homeLoader },
+        {
+          index: true,
+          element: <HomePage />,
+          loader: homeLoader,
+          errorElement: <ErrorPage />,
+        },
         {
           path: "events",
           element: <EventsPage />,
           loader: eventsLoader,
           action: eventsAction,
+          errorElement: <ErrorPage />,
         },
-        { path: "cleaning", element: <CleaningPage />, loader: cleaningLoader },
+        {
+          path: "cleaning",
+          element: <CleaningPage />,
+          loader: cleaningLoader,
+          errorElement: <ErrorPage />,
+        },
         {
           path: "complaints",
           element: <ComplaintsPage />,
           loader: complaintsLoader,
           action: complaintAction,
+          errorElement: <ErrorPage />,
         },
         {
           path: "users",
           element: <UsersPage />,
           loader: usersLoader,
+          errorElement: <ErrorPage />,
         },
       ],
     },
