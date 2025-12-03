@@ -1,5 +1,6 @@
 from datetime import datetime, timedelta
 from flask import Blueprint, jsonify
+from flask_jwt_extended import jwt_required
 from app.database import db
 from app.models.user import User
 from app.models.event import Event
@@ -38,6 +39,7 @@ def get_pair(students, rotation_index):
     ]
 
 @cleaning_bp.get("/")
+@jwt_required()
 def get_cleaning_schedule():
     # 1. Load all students (users with role=student)
     students = User.query.filter_by(role="student").order_by(User.id).all()
